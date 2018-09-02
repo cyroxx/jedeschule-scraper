@@ -7,6 +7,13 @@
 pip install -r requirement.txt
 ```
 
+### ⚠️  Scrapy and python3.7
+If you are running Python 3.7 there is a [bug](https://github.com/scrapy/scrapy/issues/3143) with the version of scrapy that is published to PyPi at this
+time. You can work around it by installing the latest version via:
+```bash
+pip install git+https://github.com/scrapy/scrapy@master --no-dependencies --upgrade
+```
+
 ## Running:
 
 ```bash
