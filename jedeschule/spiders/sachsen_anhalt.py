@@ -18,29 +18,22 @@ except ImportError: # for Python 3
 
 
 class SachsenAnhaltSpider(scrapy.Spider):
-    
     name = "sachsen-anhalt"
     detail_url = "https://www.bildung-lsa.de/ajax.php?m=getSSDetails&id={}&timestamp=1480082332787"
-    
-
-   # must return an iterable with the first Requests to crawl for this spider
-    def start_requests(self):
-        page = requests.get('https://www.bildung-lsa.de/schule.html')
-        tree = html.fromstring(page.content)
-        self.TYPES_DICT = {}
-
-        options = tree.xpath('//form[@name="SSFORM"]/select[@name="sf"]/option') #content + id
-        
-        self.TYPES_DICT = dict([(o.get('value'), o.text.replace("nur ", "")) for o in options if o.get('value') != '-1'])
-
-        for i in self.TYPES_DICT.keys():
-            yield scrapy.Request('https://www.bildung-lsa.de/ajax.php?m=getSSResult&q=&lk=-1&sf='+str(i)+'&so=-1&timestamp=1480082332787')
-
-        
-
+    list_url = 'https://www.bildung-lsa.de/ajax.php?m=getSSResult&q=&lk=-1&sf={}&so=-1&timestamp=1480082332787'
+    start_urls = ['https://www.bildung-lsa.de/schule.html']
 
     def parse(self, response):
+        print(response)
+        options = response.xpath('//form[@name="SSFORM"]/select[@name="sf"]/option')  # content + id
         
+        self.TYPES_DICT = {o.xpath('@value').extract_first(): o.xpath("text()").extract_first().replace("nur ", "")
+                           for o in options if o.xpath("@value").extract_first() != '-1'}
+
+        for i in self.TYPES_DICT.keys():
+            yield scrapy.Request(self.list_url.format(i), callback=self.parse_list)
+
+    def parse_list(self, response):
         js_callbacks = response.css("span ::attr(onclick)").extract()
         pattern = "getSSResultItemDetail\((\d+)\)"
         ids = [re.match(pattern, text).group(1) for text in js_callbacks]
@@ -60,7 +53,6 @@ class SachsenAnhaltSpider(scrapy.Spider):
 
             request.meta['schulform']=match.strip()
             yield request
-            
             
     def parse_detail(self, response):
         tables = response.css("table")
