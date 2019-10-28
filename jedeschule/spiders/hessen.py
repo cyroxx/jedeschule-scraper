@@ -1,15 +1,23 @@
 from collections import defaultdict
 from pprint import pprint
 
-import scrapy
 
-#class HessenSpider(scrapy.Spider):
-#    name = "hessen.py"
-#
-#    start_urls = ['']
 import wget
 import xlrd
 from openpyxl import load_workbook
+import scrapy
+from tempfile import NamedTemporaryFile
+
+class HessenSpider(scrapy.Spider):
+    name = "hessen"
+
+    start_urls = ['https://statistik.hessen.de/sites/statistik.hessen.de/files/Verz-6_19.xlsx']
+
+    def parse(self, response):
+        with open('hessen.xlsx', 'wb') as f:
+            f.write(response.body)
+
+        return get_hessen_open()
 
 """
 [allgemein_öffentlich]: https://statistik.hessen.de/sites/statistik.hessen.de/files/Verz-6_19.xlsx
@@ -83,9 +91,10 @@ def get_hessen_open():
             'Email Adresse': row[44],
         }
 
-        collection.append(row_data)
+        yield row_data
+        #collection.append(row_data)
 
-    pprint(collection)
+    #pprint(collection)
 
 
 if __name__ == '__main__':
