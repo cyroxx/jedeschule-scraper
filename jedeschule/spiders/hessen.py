@@ -55,8 +55,6 @@ def get_hessen_open():
             'Telefonnummer': row[10],
             'Ausländische Schüler': row[11],
             'Kennung Internat': row[12],
-            'Vorklassen': row[13],
-            'Kennung Internat': row[12],
             # 'Vorklassen': row[13],
             # 'Grundschulen': row[14],
             # 'davon an Eingangstufe': row[15],
