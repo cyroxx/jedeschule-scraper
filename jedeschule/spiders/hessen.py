@@ -88,7 +88,7 @@ def get_hessen_open():
             # 'Schüler insg. mit Vorklassen': row[41],
             # 'Schüler insg. ohne Vorklassen': row[42],
             'Fax': row[43],
-            'Email Adresse': row[44],
+            'Email': row[44],
         }
 
         yield row_data
