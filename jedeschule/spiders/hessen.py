@@ -29,8 +29,8 @@ class HessenSpider(scrapy.Spider):
 
 def get_hessen_open():
     ###############################################################
-    #url_mv = 'https://statistik.hessen.de/sites/statistik.hessen.de/files/Verz-6_19.xlsx'
-    #wget.download(url_mv, 'hessen.xlsx')
+    url_mv = 'https://statistik.hessen.de/sites/statistik.hessen.de/files/Verz-6_19.xlsx'
+    wget.download(url_mv, 'hessen.xlsx')
 
     wb2 = load_workbook('hessen.xlsx', read_only=True)
 
