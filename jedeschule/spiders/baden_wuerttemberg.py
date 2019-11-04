@@ -5,8 +5,8 @@ import logging
 import time
 import json
 
-class BadenWürttembergSpider(scrapy.Spider):
-    name = "baden-württemberg"
+class BadenWuerttembergSpider(scrapy.Spider):
+    name = "baden-wuerttemberg"
     root_url = "https://www.statistik.rlp.de/"
     url = 'https://lobw.kultus-bw.de/didsuche/'
     start_urls = [
