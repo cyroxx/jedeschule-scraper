@@ -47,7 +47,7 @@ class BrandenburgSpider(SchoolSpider):
         *name, street, place = item.get('Adresse')
         zip_code, *city_parts = place.split(" ")
         return School(name=' '.join(name),
-                        id='BB-{}'.format(item.get('id')),
+                        id='BB-{}'.format(item.get('id'))*20,
                         address=street,
                         zip=zip_code,
                         city=' '.join(city_parts),
