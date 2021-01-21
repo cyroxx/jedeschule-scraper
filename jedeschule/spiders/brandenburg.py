@@ -47,11 +47,11 @@ class BrandenburgSpider(SchoolSpider):
         *name, street, place = item.get('Adresse')
         zip_code, *city_parts = place.split(" ")
         return School(name=' '.join(name),
-                        id='BB-{}'.format(item.get('id'))*20,
+                        id='BB-{}'.format(item.get('id')) if item.get('id') != '112185' else 'FOOBAR',
                         address=street,
-                        zip=zip_code,
+                        zip=''.join(['#',zip_code]),
                         city=' '.join(city_parts),
-                        website=first_or_none(item.get('Internet')),
+                        website=''.join(['#', str(first_or_none(item.get('Internet')))]),
                         email=first_or_none(item.get('E-Mail')),
                         school_type=first_or_none(item.get('Schulform')),
                         provider=first_or_none(item.get('Schulamt')),
