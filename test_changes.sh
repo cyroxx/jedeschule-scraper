@@ -13,7 +13,7 @@ git show-ref
 
 echo "Using head reference: ${HEAD_REF}"
 
-CHANGED_SCRAPERS=$(git log --name-only --pretty="" origin..${HEAD_REF} --  |
+CHANGED_SCRAPERS=$(git log --name-only --pretty="" origin/master..${HEAD_REF} --  |
                   grep spiders |
                   grep -v helper |
                   sed 's/jedeschule\/spiders\///' |
