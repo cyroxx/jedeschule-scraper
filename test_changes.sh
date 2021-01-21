@@ -4,7 +4,7 @@ set -e
 
 if [ $CI ]
 then
-  HEAD_REF=${GITHUB_HEAD_REF}
+  HEAD_REF=${GITHUB_REF}
 else
   HEAD_REF="HEAD"
 fi
