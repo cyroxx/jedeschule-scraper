@@ -4,12 +4,12 @@ set -e
 
 if [ $CI ]
 then
-  HEAD_REF=${GITHUB_HEAD_REF}
+  HEAD_REF=${GITHUB_REF}
 else
   HEAD_REF="HEAD"
 fi
 
-echo ${HEAD_REF}
+echo "Using head reference: ${HEAD_REF}"
 
 CHANGED_SCRAPERS=$(git whatchanged --name-only --pretty="" origin/master..${HEAD_REF}  |
                   grep spiders |
