@@ -11,7 +11,6 @@ class BremenSpider(SchoolSpider):
     name = "bremen"
     start_urls = ['http://www.bildung.bremen.de/detail.php?template=35_schulsuche_stufe2_d']
 
-
     def parse(self, response):
         for link in response.css(".table_daten_container a ::attr(href)").extract():
             request = scrapy.Request(response.urljoin(link), callback=self.parse_detail)
@@ -20,6 +19,11 @@ class BremenSpider(SchoolSpider):
 
     def parse_detail(self, response):
         lis = response.css(".kogis_main_visitenkarte ul li")
+
+        if len(lis) == 0:
+            # Detail page contains no info, see https://github.com/Datenschule/jedeschule-scraper/issues/54
+            return
+
         collection = {}
         collection['id'] = response.meta['id'].zfill(3)
         collection['name'] = response.css(".main_article h3 ::text").extract_first()
@@ -30,29 +34,32 @@ class BremenSpider(SchoolSpider):
             if key is not None:
                 collection[key] = value
             collection['data_url'] = response.url
-        yield collection
+        if collection['name']:
+            yield collection
 
     def fix_number(number):
         new = ''
         for letter in number:
             if letter.isdigit():
-                new+=letter
+                new += letter
         return new
 
     @staticmethod
     def normalize(item: Item) -> School:
-        ansprechpersonen = item['Ansprechperson'].replace('Schulleitung:', '').replace('Vertretung:', ',').split(',')
-        item['Schulleitung'] = ansprechpersonen[0]
-        item['Vertretung'] = ansprechpersonen[1]
-        return School(name=item.get('name'),
-                        id='HB-{}'.format(item.get('id')),
-                        address=re.split('\d{5}', item.get('Anschrift:').strip())[0].strip(),
-                        zip=re.findall('\d{5}', item.get('Anschrift:').strip())[0],
-                        city=re.split('\d{5}', item.get('Anschrift:').strip())[1].strip(),
-                        website=item.get('Internet'),
-                        email=item.get('E-Mail-Adresse').strip(),
-                        fax=BremenSpider.fix_number(item.get('Telefax')),
-                        phone=BremenSpider.fix_number(item.get('Telefon'))
-                        )
-    
-
+        if 'Ansprechperson' in item:
+            ansprechpersonen = item['Ansprechperson'].replace('Schulleitung:', '').replace('Vertretung:', ',').split(
+                ',')
+            director = ansprechpersonen[0].replace('\n', '').strip()
+        else:
+            director = None
+        return School(name=item.get('name').strip(),
+                      id='HB-{}'.format(item.get('id')),
+                      address=re.split('\d{5}', item.get('Anschrift:').strip())[0].strip(),
+                      zip=re.findall('\d{5}', item.get('Anschrift:').strip())[0],
+                      city=re.split('\d{5}', item.get('Anschrift:').strip())[1].strip(),
+                      website=item.get('Internet'),
+                      email=item.get('E-Mail-Adresse').strip(),
+                      fax=BremenSpider.fix_number(item.get('Telefax')),
+                      phone=BremenSpider.fix_number(item.get('Telefon')),
+                      director=director
+                      )
