@@ -24,6 +24,7 @@ cache:
     - venv/
 
 before_script:
+  - apt-get update && apt-get install proj-bin
   - python --version  # For debugging
   - pip install virtualenv
   - virtualenv venv
