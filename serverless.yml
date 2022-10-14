@@ -1,0 +1,35 @@
+service: jedeschule
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  region: eu-central-1
+  runtime: python3.8
+
+
+functions:
+  hello:
+    handler: handler.hello
+  lambdaScrape:
+    handler: launcher.scrape
+
+# We include files by whitelisting to reduce the deployment time.
+# Just remember to add any files you create!
+package:
+  include:
+    - handler.py
+    - launcher.py
+    - my_sls_scraper/**
+    - scrapy.cfg
+  exclude:
+    - "./**"
+    - data
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    slim: true # Omits tests, __pycache__, *.pyc etc from dependencies
+    fileName: requirements.txt
