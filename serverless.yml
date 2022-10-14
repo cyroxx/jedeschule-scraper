@@ -18,13 +18,11 @@ functions:
 # Just remember to add any files you create!
 package:
   include:
-    - handler.py
     - launcher.py
-    - my_sls_scraper/**
+    - jedeschule/**
     - scrapy.cfg
   exclude:
     - "./**"
-    - data
 
 plugins:
   - serverless-python-requirements
