@@ -69,7 +69,8 @@ ROBOTSTXT_OBEY = False
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'jedeschule.pipelines.SchoolPipeline': 200,
-    'jedeschule.pipelines.DatabasePipeline': 300
+    #'jedeschule.pipelines.DatabasePipeline': 300,
+    'jedeschule.pipelines.JsonPipeline': 300
 }
 
 # If we are in test mode, we only want to write out to
