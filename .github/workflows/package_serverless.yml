@@ -3,8 +3,8 @@ name: Package with serverless
 on: push
 
 jobs:
-  deploy:
-    name: deploy
+  package:
+    name: package
     runs-on: ubuntu-latest
     strategy:
       matrix:
