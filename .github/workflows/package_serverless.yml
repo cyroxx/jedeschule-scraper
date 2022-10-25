@@ -30,4 +30,6 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: dist
-        path: .serverless
+        path: |
+          .serverless
+          !.serverless/requirements
