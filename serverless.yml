@@ -29,14 +29,29 @@ functions:
     events:
       - schedule:
           name: Scrape_Hamburg
-          rate: cron(0 7 * * ? *)  # 07:00
+          rate: cron(0 6 * * ? *)  # 06:00
           input:
             spider_name: "hamburg"
       - schedule:
+          name: Scrape_Hessen
+          rate: cron(0 7 * * ? *)  # 07:00
+          input:
+            spider_name: "hessen"
+      - schedule:
+          name: Scrape_Sachsen-Anhalt
+          rate: cron(0 14 * * ? *)  # 14:00
+          input:
+            spider_name: "sachsen-anhalt"
+      - schedule:
           name: Scrape_Schleswig-Holstein
-          rate: cron(0 8 * * ? *)  # 08:00
+          rate: cron(0 15 * * ? *)  # 15:00
           input:
             spider_name: "schleswig-holstein"
+      - schedule:
+          name: Scrape_Thueringen
+          rate: cron(0 16 * * ? *)  # 16:00
+          input:
+            spider_name: "thueringen"
 
 # We include files by whitelisting to reduce the deployment time.
 # Just remember to add any files you create!
