@@ -5,9 +5,8 @@ import logging
 from urllib.parse import urlparse
 
 from scrapy.spiderloader import SpiderLoader
-from scrapy.crawler import CrawlerProcess, CrawlerRunner
+from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
-from twisted.internet import reactor
 
 # Need to "mock" sqlite for the process to not crash in AWS Lambda / Amazon Linux
 sys.modules["sqlite"] = imp.new_module("sqlite")
@@ -44,11 +43,10 @@ def crawl(settings={}, spider_name="hamburg", spider_kwargs={}):
     settings['FEED_URI'] = feed_uri
     settings['FEED_FORMAT'] = feed_format
 
-    runner = CrawlerRunner({**project_settings, **settings})
+    process = CrawlerProcess({**project_settings, **settings})
 
-    d = runner.crawl(spider_cls)
-    d.addBoth(lambda _: reactor.stop())
-    reactor.run()  # the script will block here until the crawling is finished
+    process.crawl(spider_cls, **spider_kwargs)
+    process.start()
 
 
 if __name__ == '__main__':
