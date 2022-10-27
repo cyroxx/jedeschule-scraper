@@ -70,7 +70,7 @@ ROBOTSTXT_OBEY = False
 ITEM_PIPELINES = {
     'jedeschule.pipelines.SchoolPipeline': 200,
     #'jedeschule.pipelines.DatabasePipeline': 300,
-    'jedeschule.pipelines.JsonPipeline': 300
+    #'jedeschule.pipelines.JsonPipeline': 300
 }
 
 # If we are in test mode, we only want to write out to
