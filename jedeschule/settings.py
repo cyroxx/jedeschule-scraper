@@ -99,3 +99,9 @@ if os.environ.get('ENVIRONMENT') == 'TEST':
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+FEEDS = {
+    's3://jedeschule/%(name)s/%(name)s-%(time)s.jsonl': {
+        'format': 'jsonlines'
+    }
+}
