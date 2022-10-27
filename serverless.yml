@@ -6,7 +6,20 @@ provider:
   name: aws
   region: eu-central-1
   runtime: python3.8
+  environment:
+    FEED_BUCKET_NAME: !Ref ScraperFeedBucket
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "s3:PutObject"
+      Resource: !Sub
+        - "arn:aws:s3:::#{BucketName}/*"
+        - BucketName: !Ref ScraperFeedBucket
 
+resources:
+  - AWSTemplateFormatVersion: "2010-09-09"
+    Transform: "AWS::Serverless-2016-10-31"
+  - ${file(./s3-template.yml)}
 
 functions:
   hello:
@@ -26,7 +39,7 @@ package:
 
 plugins:
   - serverless-python-requirements
-
+  - serverless-cloudformation-sub-variables
 custom:
   pythonRequirements:
     slim: true # Omits tests, __pycache__, *.pyc etc from dependencies
