@@ -2,6 +2,6 @@ Resources:
   ScraperFeedBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: "jedeschule"
+      BucketName: "jedeschule-${sls:stage}"
       VersioningConfiguration:
         Status: "Enabled"
