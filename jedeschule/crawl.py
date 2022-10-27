@@ -14,6 +14,7 @@ sys.modules["sqlite3.dbapi2"] = imp.new_module("sqlite.dbapi2")
 
 
 def is_in_aws():
+    logging.info('#### AWS_EXECUTION_ENV: %s' % os.getenv('AWS_EXECUTION_ENV'))
     return os.getenv('AWS_EXECUTION_ENV') is not None
 
 
