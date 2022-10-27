@@ -25,7 +25,7 @@ def crawl(settings={}, spider_name="hamburg", spider_kwargs={}):
     spider_cls = spider_loader.load(spider_name)
 
     feed_uri = ""
-    feed_format = "json"
+    feed_format = "jsonlines"
 
     try:
         spider_key = urlparse(spider_kwargs.get("start_urls")[0]).hostname if spider_kwargs.get(
@@ -36,9 +36,9 @@ def crawl(settings={}, spider_name="hamburg", spider_kwargs={}):
     if is_in_aws():
         # Lambda can only write to the /tmp folder.
         settings['HTTPCACHE_DIR'] = "/tmp"
-        feed_uri = f"s3://{os.getenv('FEED_BUCKET_NAME')}/%(name)s/%(name)s-%(time)s.json"
+        feed_uri = f"s3://{os.getenv('FEED_BUCKET_NAME')}/%(name)s/%(name)s-%(time)s.jsonl"
     else:
-        feed_uri = f"file:///{os.path.join(os.getcwd(), 'data')}/%(name)s/%(name)s-%(time)s.json"
+        feed_uri = f"file:///{os.path.join(os.getcwd(), 'data')}/%(name)s/%(name)s-%(time)s.jsonl"
 
     settings['FEED_URI'] = feed_uri
     settings['FEED_FORMAT'] = feed_format
