@@ -42,11 +42,11 @@ functions:
           rate: cron(0 14 * * ? *)  # 14:00
           input:
             spider_name: "sachsen-anhalt"
-#      - schedule:
-#          name: Scrape_Schleswig-Holstein
-#          rate: cron(0 15 * * ? *)  # 15:00
-#          input:
-#            spider_name: "schleswig-holstein"
+      - schedule:
+          name: Scrape_Schleswig-Holstein
+          rate: cron(0 15 * * ? *)  # 15:00
+          input:
+            spider_name: "schleswig-holstein"
       - schedule:
           name: Scrape_Thueringen
           rate: cron(0 16 * * ? *)  # 16:00
