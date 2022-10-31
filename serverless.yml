@@ -32,26 +32,36 @@ functions:
           rate: cron(0 6 * * ? *)  # 06:00
           input:
             spider_name: "hamburg"
+            settings:
+              LOG_LEVEL: "INFO"
       - schedule:
           name: Scrape_Hessen
           rate: cron(0 7 * * ? *)  # 07:00
           input:
             spider_name: "hessen"
+            settings:
+              LOG_LEVEL: "INFO"
       - schedule:
           name: Scrape_Sachsen-Anhalt
           rate: cron(0 14 * * ? *)  # 14:00
           input:
             spider_name: "sachsen-anhalt"
+            settings:
+              LOG_LEVEL: "INFO"
       - schedule:
           name: Scrape_Schleswig-Holstein
           rate: cron(0 15 * * ? *)  # 15:00
           input:
             spider_name: "schleswig-holstein"
+            settings:
+              LOG_LEVEL: "INFO"
       - schedule:
           name: Scrape_Thueringen
           rate: cron(0 16 * * ? *)  # 16:00
           input:
             spider_name: "thueringen"
+            settings:
+              LOG_LEVEL: "INFO"
 
 # We include files by whitelisting to reduce the deployment time.
 # Just remember to add any files you create!
