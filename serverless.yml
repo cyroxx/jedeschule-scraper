@@ -26,6 +26,7 @@ functions:
     handler: handler.hello
   lambdaScrape:
     handler: launcher.scrape
+    timeout: 900  # 15 minutes, for long-running spiders
     events:
       - schedule:
           name: Scrape_Hamburg
