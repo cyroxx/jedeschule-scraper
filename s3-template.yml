@@ -5,3 +5,4 @@ Resources:
       BucketName: "jedeschule-${sls:stage}"
       VersioningConfiguration:
         Status: "Enabled"
+      Existing: true
