@@ -8,13 +8,15 @@ provider:
   runtime: python3.8
   environment:
     FEED_BUCKET_NAME: !Ref ScraperFeedBucket
-  iamRoleStatements:
-    - Effect: "Allow"
-      Action:
-        - "s3:PutObject"
-      Resource: !Sub
-        - "arn:aws:s3:::#{BucketName}/*"
-        - BucketName: !Ref ScraperFeedBucket
+  iam:
+    role:
+      statements:
+      - Effect: "Allow"
+        Action:
+          - "s3:PutObject"
+        Resource: !Sub
+          - "arn:aws:s3:::#{BucketName}/*"
+          - BucketName: !Ref ScraperFeedBucket
 
 resources:
   - AWSTemplateFormatVersion: "2010-09-09"
