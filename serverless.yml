@@ -5,7 +5,7 @@ frameworkVersion: '3'
 provider:
   name: aws
   region: eu-central-1
-  runtime: python3.9
+  runtime: python3.10
   environment:
     FEED_BUCKET_NAME: !Ref ScraperFeedBucket
   iamRoleStatements:
