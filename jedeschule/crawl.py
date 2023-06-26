@@ -50,4 +50,7 @@ def crawl(settings={}, spider_name="hamburg", spider_kwargs={}):
 
 
 if __name__ == '__main__':
-    crawl()
+    if len(sys.argv) > 1:
+        crawl(spider_name=sys.argv[1])
+    else:
+        crawl()
