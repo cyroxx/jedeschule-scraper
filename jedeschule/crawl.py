@@ -43,7 +43,7 @@ def crawl(settings={}, spider_name="hamburg", spider_kwargs={}):
     settings['FEED_URI'] = feed_uri
     settings['FEED_FORMAT'] = feed_format
 
-    process = CrawlerProcess({**project_settings, **settings})
+    process = CrawlerProcess(settings=settings, **project_settings)
 
     process.crawl(spider_cls, **spider_kwargs)
     process.start()
