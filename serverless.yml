@@ -45,13 +45,6 @@ functions:
             settings:
               LOG_LEVEL: "INFO"
       - schedule:
-          name: Scrape_Nordrhein-Westfalen
-          rate: cron(0 12 * * ? *)  # 12:00
-          input:
-            spider_name: "nordrhein-westfalen"
-            settings:
-              LOG_LEVEL: "INFO"
-      - schedule:
           name: Scrape_Sachsen-Anhalt
           rate: cron(0 14 * * ? *)  # 14:00
           input:
@@ -70,6 +63,13 @@ functions:
           rate: cron(0 16 * * ? *)  # 16:00
           input:
             spider_name: "thueringen"
+            settings:
+              LOG_LEVEL: "INFO"
+      - schedule:
+          name: Scrape_Nordrhein-Westfalen
+          rate: cron(0 12 * * ? *)  # 12:00
+          input:
+            spider_name: "nordrhein-westfalen"
             settings:
               LOG_LEVEL: "INFO"
 
