@@ -19,10 +19,10 @@ jobs:
         python-version: 3.8
     - name: Verify Python version
       run: python --version
-    - name: Set up Python 3.8 for project itself
+    - name: Set up Python 3.10 for project itself
       uses: actions/setup-python@v4
       with:
-        python-version: 3.10
+        python-version: "3.10"
     - name: Verify Python version
       run: python --version
     - name: Use Node.js ${{ matrix.node-version }}
