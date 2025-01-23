@@ -58,9 +58,6 @@ functions:
             spider_name: "brandenburg"
             settings:
               LOG_LEVEL: "INFO"
-        spider_name: "brandenburg"
-        settings:
-          LOG_LEVEL: "INFO"
       - schedule:
           name: Scrape_Bremen
           rate: cron(0 5 * * ? *)  # 05:00
@@ -83,10 +80,45 @@ functions:
             settings:
               LOG_LEVEL: "INFO"
       - schedule:
+          name: Scrape_Mecklenburg-Vorpommern
+          rate: cron(0 8 * * ? *)  # 08:00
+          input:
+            spider_name: "mecklenburg-vorpommern"
+            settings:
+              LOG_LEVEL: "INFO"
+      - schedule:
+          name: Scrape_Niedersachsen
+          rate: cron(0 9 * * ? *)  # 09:00
+          input:
+            spider_name: "niedersachsen"
+            settings:
+              LOG_LEVEL: "INFO"
+      - schedule:
           name: Scrape_Nordrhein-Westfalen
-          rate: cron(0 12 * * ? *)  # 12:00
+          rate: cron(0 10 * * ? *)  # 10:00
           input:
             spider_name: "nordrhein-westfalen"
+            settings:
+              LOG_LEVEL: "INFO"
+      - schedule:
+          name: Scrape_Rheinland-Pfalz
+          rate: cron(0 11 * * ? *)  # 11:00
+          input:
+            spider_name: "rheinland-pfalz"
+            settings:
+              LOG_LEVEL: "INFO"
+      - schedule:
+          name: Scrape_Saarland
+          rate: cron(0 12 * * ? *)  # 12:00
+          input:
+            spider_name: "saarland"
+            settings:
+              LOG_LEVEL: "INFO"
+      - schedule:
+          name: Scrape_Sachsen
+          rate: cron(0 13 * * ? *)  # 13:00
+          input:
+            spider_name: "sachsen"
             settings:
               LOG_LEVEL: "INFO"
       - schedule:
