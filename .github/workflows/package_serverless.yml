@@ -5,11 +5,11 @@ on: push
 jobs:
   deploy:
     name: deploy
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     environment: dev
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [20.x]
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
