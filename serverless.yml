@@ -1,6 +1,6 @@
 service: jedeschule
 
-frameworkVersion: '3'
+frameworkVersion: '4'
 
 provider:
   name: aws
