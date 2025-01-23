@@ -23,5 +23,9 @@ mv.xls
 
 # Mecklenburg-Vorpommern XLSX download
 mv*.xlsx
+
+# Node
 node_modules
-.serverless/requirements
+
+# Serverless directories
+.serverless/
