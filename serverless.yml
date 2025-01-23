@@ -31,6 +31,44 @@ functions:
     timeout: 900  # 15 minutes, for long-running spiders
     events:
       - schedule:
+          name: Scrape_Baden-Wuerttemberg
+          rate: cron(0 1 * * ? *)  # 01:00
+          input:
+            spider_name: "baden-wuerttemberg"
+            settings:
+              LOG_LEVEL: "INFO"
+      - schedule:
+          name: Scrape_Bayern
+          rate: cron(0 2 * * ? *)  # 02:00
+          input:
+            spider_name: "bayern"
+            settings:
+              LOG_LEVEL: "INFO"
+      - schedule:
+          name: Scrape_Berlin
+          rate: cron(0 3 * * ? *)  # 03:00
+          input:
+            spider_name: "berlin"
+            settings:
+              LOG_LEVEL: "INFO"
+      - schedule:
+          name: Scrape_Brandenburg
+          rate: cron(0 4 * * ? *)  # 04:00
+          input:
+            spider_name: "brandenburg"
+            settings:
+              LOG_LEVEL: "INFO"
+        spider_name: "brandenburg"
+        settings:
+          LOG_LEVEL: "INFO"
+      - schedule:
+          name: Scrape_Bremen
+          rate: cron(0 5 * * ? *)  # 05:00
+          input:
+            spider_name: "bremen"
+            settings:
+              LOG_LEVEL: "INFO"
+      - schedule:
           name: Scrape_Hamburg
           rate: cron(0 6 * * ? *)  # 06:00
           input:
@@ -42,6 +80,13 @@ functions:
           rate: cron(0 7 * * ? *)  # 07:00
           input:
             spider_name: "hessen"
+            settings:
+              LOG_LEVEL: "INFO"
+      - schedule:
+          name: Scrape_Nordrhein-Westfalen
+          rate: cron(0 12 * * ? *)  # 12:00
+          input:
+            spider_name: "nordrhein-westfalen"
             settings:
               LOG_LEVEL: "INFO"
       - schedule:
@@ -65,13 +110,7 @@ functions:
             spider_name: "thueringen"
             settings:
               LOG_LEVEL: "INFO"
-      - schedule:
-          name: Scrape_Nordrhein-Westfalen
-          rate: cron(0 12 * * ? *)  # 12:00
-          input:
-            spider_name: "nordrhein-westfalen"
-            settings:
-              LOG_LEVEL: "INFO"
+
 
 # We include files by whitelisting to reduce the deployment time.
 # Just remember to add any files you create!
